@@ -10,14 +10,17 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      height: 100%;
-      overflow: hidden;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     #vanta-bg {
-      position: absolute;
+      position: fixed;
       width: 100%;
       height: 100%;
+      top: 0;
+      left: 0;
       z-index: -1;
     }
 
@@ -25,23 +28,26 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      padding-top: 50px;
+      padding: 50px 20px;
+      box-sizing: border-box;
     }
 
     h1 {
       color: #fff;
       margin-bottom: 40px;
+      font-size: 6vw;
     }
 
     .cards {
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 20px;
       justify-content: center;
     }
 
     .card {
-      width: 200px;
+      width: 45%;
+      max-width: 200px;
       height: 200px;
       perspective: 1000px;
       cursor: pointer;
@@ -81,6 +87,22 @@
       background: #00cc88;
       transform: rotateY(180deg);
     }
+
+    /* Responsive: Stack cards vertically on small screens */
+    @media (max-width: 600px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 80%;
+      }
+
+      h1 {
+        font-size: 7vw;
+      }
+    }
   </style>
 </head>
 <body>
@@ -118,7 +140,7 @@
     </div>
   </div>
 
-  <!-- Required Scripts for Vanta.js -->
+  <!-- Vanta Background Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
   <script>
@@ -144,7 +166,7 @@
     });
   </script>
 
-  <!-- Flip Animation -->
+  <!-- Flip Card Redirection -->
   <script>
     document.querySelectorAll(".card").forEach(card => {
       card.addEventListener("click", () => {
@@ -156,5 +178,6 @@
       });
     });
   </script>
+
 </body>
 </html>
