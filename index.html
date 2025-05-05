@@ -5,6 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Basic Tax Solutions</title>
+  
+  <!-- SEO & Open Graph Meta -->
+  <meta name="description" content="Professional tax and registration services including ITR, GST, MSME, and FSSAI.">
+  <meta property="og:title" content="Basic Tax Solutions">
+  <meta property="og:description" content="Quick and easy tax services.">
+  <meta property="og:type" content="website">
+
   <style>
     html, body {
       margin: 0;
@@ -12,6 +19,8 @@
       font-family: Arial, sans-serif;
       height: 100%;
       overflow: hidden;
+      background: #000;
+      transition: opacity 0.5s;
     }
 
     #particles-js {
@@ -46,6 +55,7 @@
       height: 200px;
       perspective: 1000px;
       cursor: pointer;
+      outline: none;
     }
 
     .card-inner {
@@ -82,6 +92,18 @@
       background: #00cc88;
       transform: rotateY(180deg);
     }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 80%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -92,25 +114,25 @@
   <div class="content">
     <h1>Welcome to Basic Tax Solutions</h1>
     <div class="cards">
-      <div class="card" data-url="itr.html">
+      <div class="card" role="button" tabindex="0" data-url="itr.html">
         <div class="card-inner">
           <div class="card-front">ITR Filing</div>
           <div class="card-back">Redirecting...</div>
         </div>
       </div>
-      <div class="card" data-url="gst.html">
+      <div class="card" role="button" tabindex="0" data-url="gst.html">
         <div class="card-inner">
           <div class="card-front">GST Registration</div>
           <div class="card-back">Redirecting...</div>
         </div>
       </div>
-      <div class="card" data-url="msme.html">
+      <div class="card" role="button" tabindex="0" data-url="msme.html">
         <div class="card-inner">
           <div class="card-front">MSME Registration</div>
           <div class="card-back">Redirecting...</div>
         </div>
       </div>
-      <div class="card" data-url="fssai.html">
+      <div class="card" role="button" tabindex="0" data-url="fssai.html">
         <div class="card-inner">
           <div class="card-front">FSSAI Registration</div>
           <div class="card-back">Redirecting...</div>
@@ -119,62 +141,72 @@
     </div>
   </div>
 
-  <!-- Particle Animation JS -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#ffffff" },
-        shape: {
-          type: "circle",
-          stroke: { width: 0, color: "#000000" },
-          polygon: { nb_sides: 5 }
+  <!-- Particle Animation JS (deferred) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: {
+            type: "circle",
+            stroke: { width: 0, color: "#000000" },
+            polygon: { nb_sides: 5 }
+          },
+          opacity: { value: 0.5, anim: { enable: false } },
+          size: { value: 3, random: true, anim: { enable: false } },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
         },
-        opacity: { value: 0.5, anim: { enable: false } },
-        size: { value: 3, random: true, anim: { enable: false } },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 }
+          }
         },
-        move: {
-          enable: true,
-          speed: 3,
-          direction: "none",
-          random: false,
-          straight: false,
-          out_mode: "out",
-          bounce: false
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" },
-          resize: true
-        },
-        modes: {
-          repulse: { distance: 100, duration: 0.4 },
-          push: { particles_nb: 4 }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
+        retina_detect: true
+      });
 
-  <!-- Flip Animation JS -->
-  <script>
-    document.querySelectorAll(".card").forEach(card => {
-      card.addEventListener("click", () => {
-        card.classList.add("flip");
+      // Card interaction
+      document.querySelectorAll(".card").forEach(card => {
         const url = card.getAttribute("data-url");
-        setTimeout(() => {
-          window.location.href = url;
-        }, 1000);
+
+        const navigate = () => {
+          card.classList.add("flip");
+          document.body.style.opacity = 0;
+          setTimeout(() => {
+            window.location.href = url;
+          }, 1000);
+        };
+
+        card.addEventListener("click", navigate);
+        card.addEventListener("keydown", e => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            navigate();
+          }
+        });
       });
     });
   </script>
