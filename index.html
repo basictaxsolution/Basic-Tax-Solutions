@@ -1,1 +1,106 @@
 <!-- HTML content from earlier -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Basic Tax Solutions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .card {
+      width: 200px;
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 1s;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .card.flip .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+    }
+    .card-front {
+      background: #0077cc;
+    }
+    .card-back {
+      background: #00cc88;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Basic Tax Solutions</h1>
+  <div class="cards">
+    <div class="card" data-url="itr.html">
+      <div class="card-inner">
+        <div class="card-front">ITR Filing</div>
+        <div class="card-back">Redirecting...</div>
+      </div>
+    </div>
+    <div class="card" data-url="gst.html">
+      <div class="card-inner">
+        <div class="card-front">GST Registration</div>
+        <div class="card-back">Redirecting...</div>
+      </div>
+    </div>
+    <div class="card" data-url="msme.html">
+      <div class="card-inner">
+        <div class="card-front">MSME Registration</div>
+        <div class="card-back">Redirecting...</div>
+      </div>
+    </div>
+    <div class="card" data-url="accounting.html">
+      <div class="card-inner">
+        <div class="card-front">Accounting</div>
+        <div class="card-back">Redirecting...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll(".card").forEach(card => {
+      card.addEventListener("click", () => {
+        card.classList.add("flip");
+        const url = card.getAttribute("data-url");
+        setTimeout(() => {
+          window.location.href = url;
+        }, 1000); // Matches animation duration
+      });
+    });
+  </script>
+</body>
+</html>
