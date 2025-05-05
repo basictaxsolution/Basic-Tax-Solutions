@@ -1,4 +1,3 @@
-<!-- HTML content from earlier -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,31 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Basic Tax Solutions</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      height: 100%;
+      overflow: hidden;
     }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: 50px;
+    }
+
     h1 {
+      color: #fff;
       margin-bottom: 40px;
     }
+
     .cards {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
     }
+
     .card {
       width: 200px;
       height: 200px;
       perspective: 1000px;
       cursor: pointer;
     }
+
     .card-inner {
       width: 100%;
       height: 100%;
@@ -38,9 +54,11 @@
       transform-style: preserve-3d;
       position: relative;
     }
+
     .card.flip .card-inner {
       transform: rotateY(180deg);
     }
+
     .card-front, .card-back {
       position: absolute;
       width: 100%;
@@ -52,10 +70,13 @@
       justify-content: center;
       font-size: 18px;
       color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
+
     .card-front {
       background: #0077cc;
     }
+
     .card-back {
       background: #00cc88;
       transform: rotateY(180deg);
@@ -63,34 +84,94 @@
   </style>
 </head>
 <body>
-  <h1>Welcome to Basic Tax Solutions</h1>
-  <div class="cards">
-    <div class="card" data-url="itr.html">
-      <div class="card-inner">
-        <div class="card-front">ITR Filing</div>
-        <div class="card-back">Redirecting...</div>
+
+  <!-- Background Animation -->
+  <div id="particles-js"></div>
+
+  <div class="content">
+    <h1>Welcome to Basic Tax Solutions</h1>
+    <div class="cards">
+      <div class="card" data-url="itr.html">
+        <div class="card-inner">
+          <div class="card-front">ITR Filing</div>
+          <div class="card-back">Redirecting...</div>
+        </div>
       </div>
-    </div>
-    <div class="card" data-url="gst.html">
-      <div class="card-inner">
-        <div class="card-front">GST Registration</div>
-        <div class="card-back">Redirecting...</div>
+      <div class="card" data-url="gst.html">
+        <div class="card-inner">
+          <div class="card-front">GST Registration</div>
+          <div class="card-back">Redirecting...</div>
+        </div>
       </div>
-    </div>
-    <div class="card" data-url="msme.html">
-      <div class="card-inner">
-        <div class="card-front">MSME Registration</div>
-        <div class="card-back">Redirecting...</div>
+      <div class="card" data-url="msme.html">
+        <div class="card-inner">
+          <div class="card-front">MSME Registration</div>
+          <div class="card-back">Redirecting...</div>
+        </div>
       </div>
-    </div>
-    <div class="card" data-url="accounting.html">
-      <div class="card-inner">
-        <div class="card-front">Accounting</div>
-        <div class="card-back">Redirecting...</div>
+      <div class="card" data-url="accounting.html">
+        <div class="card-inner">
+          <div class="card-front">Accounting</div>
+          <div class="card-back">Redirecting...</div>
+        </div>
+      </div>
+      <div class="card" data-url="fssai.html">
+        <div class="card-inner">
+          <div class="card-front">FSSAI Registration</div>
+          <div class="card-back">Redirecting...</div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Particle Animation JS -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" },
+          polygon: { nb_sides: 5 }
+        },
+        opacity: { value: 0.5, anim: { enable: false } },
+        size: { value: 3, random: true, anim: { enable: false } },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 3,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+
+  <!-- Flip Animation JS -->
   <script>
     document.querySelectorAll(".card").forEach(card => {
       card.addEventListener("click", () => {
@@ -98,7 +179,7 @@
         const url = card.getAttribute("data-url");
         setTimeout(() => {
           window.location.href = url;
-        }, 1000); // Matches animation duration
+        }, 1000);
       });
     });
   </script>
